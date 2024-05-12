@@ -9,16 +9,22 @@ Create a list of random user accounts with the following fields:
 - Locale
 - Signup time (epoch)
 
-#### Usage
-Update `USERS_TO_GENERATE` in `main.py` to change the number of users to generate.
+#### Configuration
+All configuration changes are made in `config.py`, the following options are available:
+- `users_to_generate` - The number of users to generate, must be a positive number, no limit.
+- `output_filepath` - The file path to save the output to, must be a `.csv` file.
+- `first_names_filepath` - The file path to the first names list, must be a `.txt` file.
+- `last_names_filepath` - The file path to the last names list, must be a `.txt` file.
+- `email_domains_filepath` - The file path to the email domains list, must be a `.txt` file.
+- `countries_and_locales_filepath` - The file path to the countries and locales list, must be a `.csv` file (may change in the future).
 
 #### Output
-The output will be saved to `output/users.csv`
+The output will be saved to `output/users.csv`, this can be updated using the `output_filepath` variable in `config.py`.
 
 #### Performance
-1000 users - 0.0239s
-10000 users - 0.2055s
-1000000 users - 21.6710s
+- 1000 users - 0.0239s
+- 10000 users - 0.2055s
+- 1000000 users - 21.6710s
 
 #### Notes
 Only locale and country are linked, the rest of the data is random - for example, you may see a .co.uk email domain with a locale of es_MX, but will see accounts with es_MX having Mexico as the country. Passwords generated should NOT be used, these are just hashes of the users name for testing purposes and are not secure.

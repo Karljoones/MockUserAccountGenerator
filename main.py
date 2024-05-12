@@ -1,5 +1,6 @@
 from user import *
 from generators import *
+import config
 import csv
 import time
 
@@ -9,7 +10,7 @@ users = []
 
 # Save the data into output/users.csv
 def store_list():
-    with open('output/users.csv', mode='w', newline='') as users_file_csv:
+    with open(config.output_filepath, mode='w', newline='') as users_file_csv:
         users_writer = csv.writer(users_file_csv, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         users_writer.writerow(['UUID','Name', 'Email', 'Password', 'Locale', 'Country', 'Signup Time'])
 
@@ -20,9 +21,9 @@ def store_list():
 
 # Generate user data
 def generate_user_data():
-    user_names = generate_random_name(USERS_TO_GENERATE)
+    user_names = generate_random_name(config.users_to_generate)
     user_emails = generate_email_address(user_names)
-    user_countries, user_locales = random_country_and_locale(USERS_TO_GENERATE)
+    user_countries, user_locales = random_country_and_locale(config.users_to_generate)
 
     for i in range(len(user_names)):
         user = User(user_names[i])
@@ -41,4 +42,4 @@ generate_user_data()
 store_list()
 end = time.time()
 
-print(f"Generated {'{:,}'.format(USERS_TO_GENERATE)} users in {(end - start):0.4f} seconds. Data saved to output/users.csv.")
+print(f"Generated {'{:,}'.format(config.users_to_generate)} users in {(end - start):0.4f} seconds. Data saved to output/users.csv.")
