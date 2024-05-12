@@ -4,8 +4,6 @@ import config
 import csv
 import time
 
-USERS_TO_GENERATE = 1000000
-
 users = []
 
 # Save the data into output/users.csv
