@@ -21,6 +21,8 @@ def generate_user_data():
         user.signup_time = random_signup_time()
         user.set_uuid()
 
+        if config.verbose_processing: print(user)
+
         users.append(user)
 
 # Main actions
@@ -35,3 +37,5 @@ if config.sql_export: save_as_sql(users)
 end = time.time()
 
 print(f"Generated {'{:,}'.format(config.users_to_generate)} users in {(end - start):0.4f} seconds.")
+if config.csv_export: print(f"Data exported to {config.output_filepath}")
+if config.sql_export: print(f"Data exported to {config.sql_export_filepath}")

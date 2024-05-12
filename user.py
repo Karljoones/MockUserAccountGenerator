@@ -15,7 +15,7 @@ class User:
         self.name = name
 
     def __str__(self):
-        return f'Person({self.name}, {self.email}, {self._password})'
+        return f'User(uuid={self._uuid}, name={self.name}, email={self.email}, password={self._password}, locale={self.locale}, country={self.country}, signup-time={self.signup_time})'
     
     def set_uuid(self):
         self._uuid = uuid.uuid4()

@@ -9,4 +9,5 @@ sql_export_filepath = 'output/users.sql'
 
 # Features
 csv_export = True
-sql_export = False
+sql_export = True
+verbose_processing = False

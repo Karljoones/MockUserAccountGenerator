@@ -19,8 +19,9 @@ All configuration changes are made in `config.py`, the following options are ava
 - `countries_and_locales_filepath` - The file path to the countries and locales list, must be a `.csv` file (may change in the future).
 - `sql_export_table_name` - The table name to use when exporting to SQL, must be a string.
 - `sql_export_filepath` - The file path to save the SQL export to, must be a `.sql` file.
-- `sql_export` - Whether to export to SQL or not, must be a boolean.
-- `csv_export` - Whether to export to CSV or not, must be a boolean.
+- `sql_export` - Whether to export to SQL or not, must be a boolean. Default: `True`
+- `csv_export` - Whether to export to CSV or not, must be a boolean. Default: `True`
+- `verbose_processing` - Whether to print processing information or not, must be a boolean. Default: `False`
 
 #### Output
 The output will be saved to `output/users.csv`, this can be updated using the `output_filepath` variable in `config.py`.
