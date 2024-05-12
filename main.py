@@ -1,21 +1,10 @@
 from user import *
 from generators import *
+from file_management import *
 import config
-import csv
 import time
 
 users = []
-
-# Save the data into output/users.csv
-def store_list():
-    with open(config.output_filepath, mode='w', newline='') as users_file_csv:
-        users_writer = csv.writer(users_file_csv, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        users_writer.writerow(['UUID','Name', 'Email', 'Password', 'Locale', 'Country', 'Signup Time'])
-
-        for user in users:
-            users_writer.writerow([user.get_uuid(), user.name, user.email, user.get_password(), user.locale, user.country, user.signup_time])
-
-        users_file_csv.close()
 
 # Generate user data
 def generate_user_data():
@@ -36,8 +25,13 @@ def generate_user_data():
 
 # Main actions
 start = time.time()
+
 generate_user_data()
-store_list()
+
+# Export data
+if config.csv_export: save_as_csv(users)
+if config.sql_export: save_as_sql(users)
+
 end = time.time()
 
-print(f"Generated {'{:,}'.format(config.users_to_generate)} users in {(end - start):0.4f} seconds. Data saved to output/users.csv.")
+print(f"Generated {'{:,}'.format(config.users_to_generate)} users in {(end - start):0.4f} seconds.")
