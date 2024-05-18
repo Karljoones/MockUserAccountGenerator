@@ -1,12 +1,14 @@
 from user import *
 from generators import *
-from file_management import *
+from utils.file_management import *
+from utils.decorators import time_measurement_decorator
 import config
 import time
 
 users = []
 
 # Generate user data
+@time_measurement_decorator
 def generate_user_data():
     user_names = generate_random_name(config.users_to_generate)
     user_emails = generate_email_address(user_names)
@@ -25,17 +27,23 @@ def generate_user_data():
 
         users.append(user)
 
-# Main actions
-start = time.time()
+def main():
+    start = time.time()
 
-generate_user_data()
+    print(f"Generating {'{:,}'.format(config.users_to_generate)} users...\n")
 
-# Export data
-if config.csv_export: save_as_csv(users)
-if config.sql_export: save_as_sql(users)
+    generate_user_data()
 
-end = time.time()
+    # Export data
+    if config.csv_export or config.sql_export: create_output_folder()
+    if config.csv_export: save_as_csv(users)
+    if config.sql_export: save_as_sql(users)
 
-print(f"Generated {'{:,}'.format(config.users_to_generate)} users in {(end - start):0.4f} seconds.")
-if config.csv_export: print(f"Data exported to {config.output_filepath}")
-if config.sql_export: print(f"Data exported to {config.sql_export_filepath}")
+    end = time.time()
+
+    if config.verbose_debugging: print(f"\nSuccess! Generated {'{:,}'.format(config.users_to_generate)} users in {(end - start):0.4f} seconds.\n")
+    if config.csv_export: print(f"Data exported to /{config.export_directory}/{config.csv_export_filename}")
+    if config.sql_export: print(f"Data exported to /{config.export_directory}/{config.sql_export_filename}")
+
+if __name__ == "__main__":
+    main()
