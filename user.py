@@ -23,6 +23,9 @@ class User:
     def get_uuid(self):
         return self._uuid
     
+    def get_sanitised_name(self):
+        return self.name.replace('\'', '')
+    
     def set_password(self, password):
         password_bytes = password.encode('utf-8')
         hash_object = hashlib.sha256(password_bytes)

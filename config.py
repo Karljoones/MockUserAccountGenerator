@@ -15,9 +15,9 @@ countries_and_locales_filepath = 'data/countries_and_locales.csv'
 # SQL
 sql_export = True
 sql_export_table_name = 'USERS'
-sql_drop_table_if_exists = False
+sql_drop_table_if_exists = True
 sql_create_table = True
-sql_primary_key = 'uuid'
+sql_primary_key = 'userid'
 
 # CSV
 csv_export = True

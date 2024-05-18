@@ -33,9 +33,10 @@ def save_as_sql(users):
 
         # Create table, if option is enabled within `config.py`
         if config.sql_create_table:
-            users_file_sql.write(f"CREATE TABLE {config.sql_export_table_name} (uuid VARCHAR(255), name VARCHAR(255), email VARCHAR(255), password VARCHAR(255), locale VARCHAR(255), country VARCHAR(255), signup_time FLOAT, PRIMARY KEY ({config.sql_primary_key}));\n")
+            users_file_sql.write(f"CREATE TABLE {config.sql_export_table_name} (userid VARCHAR(255), name VARCHAR(255), email VARCHAR(255), password VARCHAR(255), locale VARCHAR(255), country VARCHAR(255), signup FLOAT, PRIMARY KEY ({config.sql_primary_key}));\n")
 
         for user in users:
-            users_file_sql.write(f"INSERT INTO {config.sql_export_table_name} (uuid, name, email, password, locale, country, signup_time) VALUES ('{user.get_uuid()}', '{user.name}', '{user.email}', '{user.get_password()}', '{user.locale}', '{user.country}', {user.signup_time});\n")
+            # users_file_sql.write(f"INSERT INTO {config.sql_export_table_name} (uuid, name, email, password, locale, country, signup_time) VALUES ('{user.get_uuid()}', '{user.name}', '{user.email}', '{user.get_password()}', '{user.locale}', '{user.country}', {user.signup_time});\n")
+            users_file_sql.write(f"INSERT INTO {config.sql_export_table_name} (userid, name, email, password, locale, country, signup) VALUES ('{user.get_uuid()}', '{user.get_sanitised_name()}', '{user.email}', '{user.get_password()}', '{user.locale}', '{user.country}', {user.signup_time});\n")
 
         users_file_sql.close()

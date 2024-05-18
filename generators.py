@@ -35,12 +35,14 @@ def generate_email_address(names_for_emails):
     if isinstance(names_for_emails, list):
         generated_email_list = []
 
-        for _ in range(len(names_for_emails)):
-            generated_email_list.append(f"{names_for_emails[_].lower().replace(' ', '.')}{randint(0, 1000)}@{choice(domains_list)}")
+        for i in range(len(names_for_emails)):
+            name = names_for_emails[i].lower().replace(' ', '.').replace('\'', '')
+            generated_email_list.append(f"{name}{randint(0, 1000)}@{choice(domains_list)}")
 
         return generated_email_list
     
-    return f"{names_for_emails.lower().replace(' ', '.')}{randint(0, 1000)}@{choice(domains_list)}"
+    name = names_for_emails.lower().replace(' ', '.').replace('\'', '')
+    return f"{name}{randint(0, 1000)}@{choice(domains_list)}"
 
 # Generate a random signup time
 def random_signup_time():
